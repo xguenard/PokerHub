@@ -1,7 +1,10 @@
 #Image capture engine
-import image
-import pyscreenshot as ImageGrab
+
 import time
+
+import image
+import pyscreenshot
+
 
 class CaptureEngine:
     """
@@ -13,24 +16,23 @@ class CaptureEngine:
        self.delay = 2 # time between screen shots
        self.names = ("screenshot1.jpg", "screenshot2.jpg", "screenshot3.jpg")
 
-
     def start(self, nb_iter):
         """
             Launch the scan loop
         """
 
-        for round in range(0, nb_iter):
+        for step in range(1, nb_iter + 1):
 
-            print("Taking screenshot")
-            im = ImageGrab.grab()
+            print("Taking screenshot # " + str(step))
+            im = pyscreenshot.grab()
 
-            print("Saving screenshot in "+self.names[ round%3 ] )
-            im.save(self.names[ round%3 ] )
+            print("Saving screenshot in " + self.names[step%3])
+            im.save(self.names[step%3])
 
-            print("Screenshot saved")
+            print("Screenshot saved\n")
 
             time.sleep(self.delay)
-            round+=1
+            step+=1
 
 
 if __name__ == "__main__":
